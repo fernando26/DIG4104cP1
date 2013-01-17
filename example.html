@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>JMM Drag and Drop</title>
+<!--
+Example for DIG4104c
+Based on W3C example at
+http://www.w3schools.com/html/html5_draganddrop.asp
+M. Moshell - December 2012
+-->
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="css/style-ie.css" />
+<![endif]-->
+
+<script>
+function allowDrop(ev)
+{
+ev.preventDefault();
+}
+
+function drag(ev)
+{
+ev.dataTransfer.setData("Text",ev.target.id);
+}
+
+function drop(ev)
+{
+ev.preventDefault();
+var data=ev.dataTransfer.getData("Text"); //data is id of coupon divs
+var coupon=document.getElementById(data); // var coupon holds the data from coupon div
+ev.target.appendChild(coupon);
+
+var what=ev.target.textContent;
+var option=ev.target.id;
+
+// $5 dollar coupon conditions	
+if(data === "coupon1" && option === "div1"){
+document.getElementById("confirmation").innerHTML="Congratulations you have just signed up for 3 months of membership in the Professional Bite-Me Group. Your first month's fee will $15.00 and the remaining 2 months will cost $20.00."
+}
+else if(data === "coupon1" && option === "div2"){
+document.getElementById("confirmation").innerHTML="Congratulations you have just signed up for 3 months of membership in the Professional Bite-Me Group. Your first month's fee will $35.00 and the remaining five months will cost $40.00."
+}
+else if(data === "coupon1" && option === "div3"){
+document.getElementById("confirmation").innerHTML="Congratulations you chose the free option! ALL BLOOD IS FREE!"
+}	
+// $10 dollar coupon conditions
+if(data === "coupon2" && option === "div1"){
+document.getElementById("confirmation").innerHTML="Congratulations you have just signed up for 3 months of membership in the Professional Bite-Me Group. Your first month's fee will $10.00 and the remaining 2 months will cost $20.00."
+}
+else if(data === "coupon2" && option === "div2"){
+document.getElementById("confirmation").innerHTML="Congratulations you have just signed up for 3 months of membership in the Professional Bite-Me Group. Your first month's fee will $30.00 and the remaining five months will cost $40.00."
+}
+else if(data === "coupon2" && option === "div3"){
+document.getElementById("confirmation").innerHTML="Congratulations you chose the free option! ALL BLOOD IS FREE!"
+}	
+// $20 dollar coupon conditions
+if(data === "coupon3" && option === "div1"){
+document.getElementById("confirmation").innerHTML="Congratulations you have just signed up for 3 months of membership in the Professional Bite-Me Group. Your first month's will be free and the remaining 2 months will cost $20.00."
+}
+else if(data === "coupon3" && option === "div2"){
+document.getElementById("confirmation").innerHTML="Congratulations you have just signed up for 3 months of membership in the Professional Bite-Me Group. Your first month's fee will $20.00 and the remaining five months will cost $40.00."
+}
+else if(data === "coupon3" && option === "div3"){
+document.getElementById("confirmation").innerHTML="Congratulations you chose the free option! ALL BLOOD IS FREE!"
+}	
+// default setting
+//Testing div! DELETE When you are done testing!
+document.getElementById("div7").innerHTML="Image arrived at "+what+" "+option+" "+data; 
+
+}
+</script>
+</head>
+<body>
+<div id="page-wrap">
+<div id="inside">
+
+<div id="options">
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">Type A Blood - $20 </div>
+<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" >All Blood Types - $40 </div>
+<div id="div3" ondrop="drop(event)" ondragover="allowDrop(event)">Free Blood - FREE </div>
+</div>
+
+<div id="coupons">
+
+<div id="div4" ondrop="drop(event)" ondragover="allowDrop(event)">
+<div id="coupon1" draggable="true" ondragstart="drag(event)" >
+ <img src="coupon.jpg" draggable="true" ondragstart="drag(event)" id="drag2" width="88" height="88">
+</div>
+</div>
+
+<div id="div5" ondrop="drop(event)" ondragover="allowDrop(event)">
+<div id="coupon2" draggable="true" ondragstart="drag(event)" >
+ <img src="coupon2.jpg" draggable="true" ondragstart="drag(event)" id="drag2" width="88" height="88">
+</div>
+</div>
+
+<div id="div6" ondrop="drop(event)" ondragover="allowDrop(event)">
+<div id="coupon3" draggable="true" ondragstart="drag(event)" >
+ <img src="coupon3.jpg" draggable="true" ondragstart="drag(event)" id="drag2" width="88" height="88">
+</div>
+</div>
+</div>
+
+<div id="confirmation"></div>
+<div id="div7"></div>
+</div>
+</div>
+</body>
+</html>
